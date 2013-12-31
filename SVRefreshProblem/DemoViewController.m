@@ -7,6 +7,8 @@
 //
 
 #import "DemoViewController.h"
+#import "UIScrollView+SVPullToRefresh.h"
+#import "RefreshBarView.h"
 
 @interface DemoViewController ()
 
@@ -14,10 +16,20 @@
 
 @implementation DemoViewController
 
+@synthesize tableView;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    
+    [tableView addPullToRefreshWithActionHandler:^{
+        NSLog(@"pulled to refresh");
+    }];
+    
+    RefreshBarView* refreshBarView = [[[NSBundle mainBundle] loadNibNamed:@"RefreshBarView" owner:self options:nil] objectAtIndex:0];
+    refreshBarView.bounds = CGRectMake(0, 0, 320, 60);
+    
+    [[tableView pullToRefreshView] setCustomView:refreshBarView forState:SVPullToRefreshStateLoading];
 }
 
 - (void)didReceiveMemoryWarning

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DemoViewController : UIViewController
+@interface DemoViewController : UITableViewController
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end
